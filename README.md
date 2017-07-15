@@ -9,6 +9,6 @@ dirlevel.py: filename pattern search organizing multitool
 
 mcb.py: Saves, loads and deletes pieces of text to the clipboard.
 
-multireader.py: reads pdf, docx, xlsx and any other files, outputs a datastructure in the form of a dictionary with filename...
+multireader.py: reads pdf, docx, xlsx and any other files, outputs successful reads into datastructure in the form of a dictionary, unsuccessful reads in a seperate list.
 
 regexcontentsearch.py: searches within files in directories that matches a regular expression. Saves into .txt file.
