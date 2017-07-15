@@ -33,12 +33,11 @@ def fileread(filename):
         csvRows = []
         csvFileObj = open(filename)
         readerObj = csv.reader(csvFileObj)
-        #csvRows = list(readerObj)
-        for row in readerObj:
-            csvRows.append(row) #creates list of lists of strings
-            #csvRows.append(row.extend(str(readerObj.line_num))) #with line_num appended in row.
-            #csvRows.append(row.insert(0, str(readerObj.line_num))) #alternatively, inserts .line_num as row[0] 
-        dataobject[filename] = row
+        #csvRows = list(readerObj) #less details
+        for row in readerObj: 
+        #    csvRows.append(row.extend(str(readerObj.line_num))) #with line_num appended in end of row.
+            csvRows.append(row.insert(0, str(readerObj.line_num))) #alternatively, inserts .line_num as row[0] 
+        dataobject[filename] = csvRows
         csvFileObj.close()
 
     elif filename.endswith('.xlsx') or filename.endswith('.xlsm') or filename.endswith('.xltx') or filename.endswith('.xltm'):
@@ -84,8 +83,11 @@ dirfiles = os.listdir(userdir)
 #os.walk method; loops for all files and subdirectories
 for dirpath, subdirs, files in os.walk(userdir):
     for filename in files:
-        try: fileread(filename)            
-        except: continue
+        if os.path.isfile(str(dirpath) + "\\" + filename):
+            filename = str(dirpath) + "\\" + filename
+            try:
+                fileread(filename)
+            except: continue
 
 #Folder only option; loops only for all files, no subdirectories
 #for i in range(len(dirfiles)):
