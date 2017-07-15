@@ -7,24 +7,28 @@ dataobject={} #keep this line of code above filewalk or dir loop.
 
 #print('In which directory do you want to search? Provide input of the form: C:\dir1\subdir1\subdir2')
 #userdir = str(input())
-##os.walk method
 #dirfiles = os.listdir(userdir)
+
+##os.walk method; loops for all files and subdirectories
 #for dirpath, subdirs, files in os.walk(userdir):
 #    for filename in files:
 #        try: 
 #            #insert bulk here            
 #        except: continue
-#
-##Folder only option
+
+##Folder only option; loops only for all files, no subdirectories
 #for i in range(len(dirfiles)):
+#    filename = dirfiles[i]
+#        try:
+#           #insert bulk here
+#        else: continue
 
-
-
+#Specific file option; no file looping
 print('Which file do you want to read? Provide input of the form: C:\\dir1\\subdir1\\file1')
 filename = str(input())
 
-
-readdpath = re.compile(r'[a-zA-Z]\:\\')
+#bulk from here on, thinking of converting into a function taking filename, output dataobject...
+readdpath = re.compile(r'[a-zA-Z]\:\\') #re of something like "C:\\"
 if not readdpath.search(filename): filename = os.getcwd() + "\\" + filename #fills in full path into filename if user lazy
 
 if filename.endswith('.docx'):
