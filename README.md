@@ -3,9 +3,9 @@ Multi-tool scripts for modular use in work.
 
 Aiming for flexibility and ease of use enough for similarly positioned business/accountancy professionals like me with basic knowledge of Programming.
 
-Current works
+##Current works
 
-General purpose:
+#General purpose:
 
 mcb.py: Saves, loads and deletes pieces of text to the clipboard.
 
@@ -15,13 +15,13 @@ writemodules.py: writing modules multitool, writes datastructure into txt, csv o
 
 inputsql.py: Interfaces via SQLite, handles querries, writes SELECT querries into datastructure.
 
-Specific purpose:
+#Specific purpose:
 
 us2eudatesrename.py: renames filename titles with us to eu date format.
 
 regexcontentsearch.py: searches within files in directories that matches a regular expression. Saves into .txt file.
 
-To do:
+##To do:
 
 -draft more compact format for regex methods module. (look further to verbose and re.objects)
 
