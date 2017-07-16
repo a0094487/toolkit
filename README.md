@@ -1,7 +1,7 @@
 # toolkit
 Multi-tool scripts for modular use in work.
 
-Aiming for flexibility and ease of use enough for similarly positioned business/accountancy professionals with only basic knowledge of Programming.
+Aiming for flexibility and ease of use enough for similarly positioned business/accountancy professionals with only basic knowledge of programming.
 
 ## Current works
 
