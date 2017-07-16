@@ -1,7 +1,7 @@
 # toolkit
 Multi-tool scripts for modular use in work.
 
-Aiming for flexibility and ease of use enough for similarly positioned business/accountancy professionals like me with basic knowledge of Programming.
+Aiming for flexibility and ease of use enough for similarly positioned business/accountancy professionals with only basic knowledge of Programming.
 
 ## Current works
 
@@ -29,6 +29,8 @@ regexcontentsearch.py: searches within files in directories that matches a regul
 
 -get started on Gui Automation.
 
--pandas, matplotlib, scikit-learn, nltk, and networkx
+-Pandas, NumPy, matplotlib, scikit-learn, NLTK, and NetworkX
 
 -implement SQL drivers into inputsql.py.
+
+-HTML reader with Request, JSON and HTML writer.
