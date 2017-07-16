@@ -1,4 +1,4 @@
-##Writing modules, csv writing, directory organization, and excel writing
+##Writing modules: .txt, .csv writing, directory organization, and excel writing
 import csv, os, shutil, openpyxl
 
 ## Write out a CSV file.
@@ -18,6 +18,13 @@ if not os.path.exists(destinationfolder): os.makedirs(destinationfolder) #addres
 shutil.move(orginalfilename, os.path.join(destinationfolder, newfilename)) # cuts file with 1st filename and pastes a copy with 2nd filename.  
 #shutil.copy(originalFilename, destinationfolder) # makes copies into folder
 #shutil.move(originalFilename, destinationfolder) # cut-paste into folder
+
+
+##write to .txt file module
+dumpfile = open('C:\\Users\\a0094\\Desktop\\destinationfilename.txt', 'w') #write mode
+dumpfile.close
+dumpfile = open('C:\\Users\\a0094\\Desktop\\destinationfilename.txt', 'a') #append mode, each write in new line
+for values in flatdataobject: dumpfile.write(str(values))
 
 
 ## Writes into excel, optional various worksheets component
