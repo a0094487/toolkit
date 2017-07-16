@@ -7,9 +7,6 @@ import PyPDF2, docx, csv, openpyxl, re, os
 from openpyxl.utils import get_column_letter, column_index_from_string
 
 def fileread(filename):
-    readdpath = re.compile(r'[a-zA-Z]\:\\') #re of something like "C:\\"
-    if not readdpath.search(filename): filename = os.getcwd() + "\\" + filename #fills in full path into filename if user lazy
-
     if filename.endswith('.docx'):
         doc = docx.Document(filename)
         fullText = []
@@ -84,7 +81,7 @@ dirfiles = os.listdir(userdir)
 for dirpath, subdirs, files in os.walk(userdir):
     for filename in files:
         if os.path.isfile(str(dirpath) + "\\" + filename):
-            filename = str(dirpath) + "\\" + filename
+            filename = os.path.join(os.path.abspath(dirpath), filename)
             try:
                 fileread(filename)
             except: continue
@@ -92,13 +89,17 @@ for dirpath, subdirs, files in os.walk(userdir):
 #Folder only option; loops only for all files, no subdirectories
 #for i in range(len(dirfiles)):
 #    filename = dirfiles[i]
+#    readdpath = re.compile(r'[a-zA-Z]\:\\') #re of something like "C:\\"
+#    if not readdpath.search(filename): filename = os.path.join(os.getcwd(), filename) #fills in full path into filename if user lazy
 #    try: fileread(filename)
 #    except: continue
 
 #Specific file option; no file looping
 #print('Which file do you want to read? Provide input of the form: C:\\dir1\\subdir1\\file1')
 #filename = str(input())
+#readdpath = re.compile(r'[a-zA-Z]\:\\') #re of something like "C:\\"
+#if not readdpath.search(filename): filename = os.path.join(os.getcwd(), filename)
 #fileread(filename)
 
-print(dataobject)
-print(failedread)
+#print(dataobject)
+#print(failedread)
