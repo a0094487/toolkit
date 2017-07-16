@@ -1,9 +1,9 @@
 # toolkit
 Multi-tool scripts for modular use in work.
 
-Aiming for breadth and ease of use enough for similarly positioned business/accountancy professionals like me with basic knowledge of Programming.
+Aiming for flexibility and ease of use enough for similarly positioned business/accountancy professionals like me with basic knowledge of Programming.
 
-Current works:
+Current works
 
 General purpose:
 
@@ -11,7 +11,9 @@ mcb.py: Saves, loads and deletes pieces of text to the clipboard.
 
 multireader.py: reads pdf, docx, xlsx and any other files, outputs successful reads into datastructure in the form of a dictionary, unsuccessful reads in a seperate list.
 
-writemodules.py: writing modules multitool, writes datastructure into csv or into excel, also allows file-directory organization.
+writemodules.py: writing modules multitool, writes datastructure into txt, csv or into excel, also allows file-directory organization.
+
+input.sql: Interfaces via SQLite, handles querries, writes SELECT querries into datastructure.
 
 Specific purpose:
 
