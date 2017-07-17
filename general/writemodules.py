@@ -39,8 +39,7 @@ except: pass
 #sheet = wb.get_sheet_by_name('someothersheetname')
 #wb.create_sheet(index=0, title='somesheetname') #indexed as 0th sheet
 worksheets = workbook.get_sheet_names()
-numofworksheets = count(worksheets)
-lastworksheetname = worksheets[numofworksheets-1]
+lastworksheetname = worksheets[-1]
 sheet = wb.get_sheet_by_name(lastworksheetname)
 ## dataobject dictionary format addon loop
 #for keyvaluepairs in dataobject:
