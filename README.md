@@ -1,5 +1,5 @@
 # toolkit
-Multi-tool scripts for modular use in work.
+Assembling multi-tool scripts for modular use in work.
 
 Aiming for flexibility and ease of use enough for similarly positioned business/accountancy professionals with only basic knowledge of programming.
 
@@ -8,6 +8,7 @@ Aiming for flexibility and ease of use enough for similarly positioned business/
 ### General purpose:
 
 mcb.py: Saves, loads and deletes pieces of text to the clipboard.
+from lotspaih
 
 multireader.py: reads pdf, docx, xlsx and any other files, outputs successful reads into datastructure in the form of a dictionary, unsuccessful reads in a seperate list.
 
@@ -18,8 +19,15 @@ inputsql.py: Interfaces via SQLite, handles querries, writes SELECT querries int
 ### Specific purpose:
 
 us2eudatesrename.py: renames filename titles with us to eu date format.
+from Al Sweigart
 
 regexcontentsearch.py: searches within files in directories that matches a regular expression. Saves into .txt file.
+
+## Recommendations:
+
+[lotspaih/automateBoringstuffPython](https://github.com/lotspaih/automateBoringstuffPython) for good specific purpose type examples.
+
+[vinta/awesome-python](https://github.com/vinta/awesome-python) for excellent list of Python frameworks, libraries and resources.
 
 ## To do:
 
