@@ -11,15 +11,22 @@ userdir = str(input())
 dirfiles = os.listdir(userdir)
 
 #creates dumpfile, commits to secondary memory, reopens in append mode.
-dumpfile = open('C:\\Users\\a0094\\Desktop\\dump.txt', 'w')
+dumpfile = open(userdir+'\\dump.txt', 'w')
 dumpfile.close
-dumpfile = open('C:\\Users\\a0094\\Desktop\\dump.txt', 'a')
-
+dumpfile = open(userdir+'\\dump.txt', 'a')
 
 print('What text do you want to search for? Provide Regex, or string simply')
 userReg = str(input())
 stringRegex = re.compile(userReg)
-fileRegex = re.compile(r'\w+\.txt')
+
+#sample complex re object plus sample extraction.
+#datePattern = re.compile(r'''^(.*?) #All text before date: (1)
+#                         ((0|1)?\d)- #One or two month digits:(3) within (2) 
+#                         ((0|1|2|3)?\d)- #One or two digits for date: (5) within (4)
+#                         ((19|20)\d\d) #Four digits for the year: (7) within (6)
+#                         (.*?)$ #all text after the date: (8)
+#                         ''', re.VERBOSE)
+#datePattern.search(somestring1).group(4) #returns string satisfying group 4 
 
 #Directory walk option
 for dirpath, subdirs, files in os.walk(userdir):
@@ -36,6 +43,7 @@ for dirpath, subdirs, files in os.walk(userdir):
             linenumber = linenumber + 1
             
 #Folder only option
+#fileRegex = re.compile(r'\w+\.txt')
 #for i in range(len(dirfiles)):
 #    if fileRegex.search(dirfiles[i]):
 #        openFile = open(userdir + "\\" + dirfiles[i])
@@ -48,7 +56,3 @@ for dirpath, subdirs, files in os.walk(userdir):
 #            linenumber = linenumber + 1
 
 dumpfile.close
-
-
-
-
