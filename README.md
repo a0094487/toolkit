@@ -23,6 +23,10 @@ from Al Sweigart
 
 regexcontentsearch.py: searches within files in directories that matches a regular expression. Saves into .txt file.
 
+pdfmerge.py: Merges all pdf in a specified folder. Option to choose which pages.
+
+backtoZip.py: Input an entire subdirectory to backup, names backup by datetime.
+
 ## Recommendations:
 
 [lotspaih/automateBoringstuffPython](https://github.com/lotspaih/automateBoringstuffPython) for good specific purpose type examples.
@@ -31,13 +35,11 @@ regexcontentsearch.py: searches within files in directories that matches a regul
 
 ## To do:
 
--draft more compact format for regex methods module. (look further to verbose and re.objects)
-
 -add picture file DPI decrease option into copy-move function in writemodules.
 
--get started on Gui Automation.
+-Pandas, NumPy, matplotlib, scikit-learn, NLTK, and NetworkX, implement current scripts to better interface with data analysis libraries.
 
--Pandas, NumPy, matplotlib, scikit-learn, NLTK, and NetworkX
+-get started on Gui Automation.
 
 -implement SQL drivers into inputsql.py.
 
