@@ -57,7 +57,7 @@ def fileread(filename):
                     #note: date/datatime/time objects retained. use .strftime('%Y/%m/%d'/%H/%m/%s) seperately to return string.          
         
     else:
-        #continue
+        #continue 
         try: 
             openfile = open(filename)
             readFile = openfile.readlines()
@@ -77,7 +77,7 @@ print('In which directory do you want to search? Provide input of the form: C:\d
 userdir = str(input())
 dirfiles = os.listdir(userdir)
 
-#os.walk method; loops for all files and subdirectories
+##os.walk method; loops for all files and subdirectories
 for dirpath, subdirs, files in os.walk(userdir):
     for filename in files:
         if os.path.isfile(str(dirpath) + "\\" + filename):
@@ -86,7 +86,7 @@ for dirpath, subdirs, files in os.walk(userdir):
                 fileread(filename)
             except: continue
 
-#Folder only option; loops only for all files, no subdirectories
+##Folder only option; loops only for all files, no subdirectories
 #for i in range(len(dirfiles)):
 #    filename = dirfiles[i]
 #    readdpath = re.compile(r'[a-zA-Z]\:\\') #re of something like "C:\\"
@@ -94,7 +94,7 @@ for dirpath, subdirs, files in os.walk(userdir):
 #    try: fileread(filename)
 #    except: continue
 
-#Specific file option; no file looping
+##Specific file option; no file looping
 #print('Which file do you want to read? Provide input of the form: C:\\dir1\\subdir1\\file1')
 #filename = str(input())
 #readdpath = re.compile(r'[a-zA-Z]\:\\') #re of something like "C:\\"
