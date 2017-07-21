@@ -37,10 +37,12 @@ backtoZip.py: Input an entire subdirectory to backup, names backup by datetime.
 
 -add picture file DPI decrease option into copy-move function in writemodules.
 
--Pandas, NumPy, matplotlib, scikit-learn, NLTK, and NetworkX, implement current scripts to better interface with data analysis libraries.
+-Pandas, NumPy, matplotlib, scikit-learn, NLTK, and NetworkX, implement current scripts to better interface with data analysis libraries. 
+
+--for pandas, tweak multiread to yield, dictionary of ordered lists, keys as imported column name for pandas dataframe, value as list with all the values for the column, in accordance to the index. Alternatively, List of lists, each inner list a row, with values within ordered in accordance to columns. Note common format for tweaking the other more general purpose programming scripts.
 
 -get started on Gui Automation.
 
 -implement SQL drivers into inputsql.py.
 
--HTML reader with Request, JSON and HTML writer.
+-HTML reader with Request, JSON and HTML writer (if non-data analytics task...)
