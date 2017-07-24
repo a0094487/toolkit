@@ -27,6 +27,8 @@ pdfmerge.py: Merges all pdf in a specified folder. Option to choose which pages.
 
 backtoZip.py: Input an entire subdirectory to backup, names backup by datetime.
 
+picresize.py: resizes image files in a directory filewalk, specific folder or specific file to (500, x), roughly keeping aspect ratio.
+
 ## Recommendations:
 
 [lotspaih/automateBoringstuffPython](https://github.com/lotspaih/automateBoringstuffPython) for good specific purpose type examples.
@@ -35,9 +37,7 @@ backtoZip.py: Input an entire subdirectory to backup, names backup by datetime.
 
 ## To do:
 
--add picture file DPI decrease option into copy-move function in writemodules.
-
--Pandas, NumPy, matplotlib, scikit-learn, NLTK, and NetworkX, implement current scripts to better interface with data analysis libraries. 
+-Continue picking up Pandas, NumPy, matplotlib, scikit-learn, NLTK, and NetworkX, implement current scripts to better interface with data analysis libraries. 
 
 --for pandas, tweak multiread to yield, dictionary of ordered lists, keys as imported column name for pandas dataframe, value as list with all the values for the column, in accordance to the index. Alternatively, List of lists, each inner list a row, with values within ordered in accordance to columns. Note common format for tweaking the other more general purpose programming scripts.
 
