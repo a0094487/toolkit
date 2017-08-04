@@ -29,6 +29,9 @@ backtoZip.py: Input an entire subdirectory to backup, names backup by datetime.
 
 picresize.py: resizes image files in a directory filewalk, specific folder or specific file to (500, x), roughly keeping aspect ratio.
 
+pdfresizer.py: resizes pdf files in a directory filewalk, specific folder or specific file to (500, x), roughly keeping aspect ratio.
+
+
 ## Recommendations:
 
 [lotspaih/automateBoringstuffPython](https://github.com/lotspaih/automateBoringstuffPython) for good specific purpose type examples.
