@@ -19,7 +19,7 @@ for filename in pdfFiles:
     pdfFileObj = open(filename, 'rb')
     pdfReader = PyPDF2.PdfFileReader(pdfFileObj)
     #for pageNum in range(5, 7): #sample modification; if say, you only want to copy every 5th, 6th, 7th page.
-    for pageNum in range(1, pdfReader.numPages):
+    for pageNum in range(0, pdfReader.numPages):
         pageObj = pdfReader.getPage(pageNum)
         pdfWriter.addPage(pageObj)
 
