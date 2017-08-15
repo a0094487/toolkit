@@ -1,7 +1,6 @@
 ##pdfresize
 ##outputs a resized (scaled) copy of a pdf file in same directory as originals
 ##auto loaded a directory walk, swap method to own purposes.
-##Shit, doesnt reduce pdf file size though....
 
 import PyPDF2, os
 
@@ -16,11 +15,7 @@ def pdfresize(filename):
             pg = 0
             while pg < numberofpages:
                 pageObj = pdfReader.getPage(pg)
-                (w, h) = pageObj.mediaBox.upperRight
-                #.getUpperRight_x(), .getUpperRight_y()
-                height=1000  # i want height=1000. Scaled.
-                width= w * height / h
-                pageObj.scaleTo(width, height)
+                pageObj.scaleBy(0.5)
                 pdfWriter.addPage(pageObj)
                 pg = pg + 1
             pdfWriter.write(pdfOutputFile)
