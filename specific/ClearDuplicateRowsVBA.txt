@@ -1,0 +1,71 @@
+Sub clearduplicates()
+    ' For use in ms excel, loops 'test column' 3 (C). Clears rows and move up where duplicate entries.
+    
+    Dim rDel As Range, rng As Range, nrng As Range
+    Dim dat As Variant, ndat As Variant
+    Dim i As Long, cnt As Long
+    Dim TestCol As Long, DumCol As Long
+
+    ' Avoid magic numbers
+    TestCol = 3 ' Column C
+    DumCol = 8
+
+    ' Reference the correct sheet
+    With ActiveSheet
+        ' Get data range
+        Set rng = .Range(.Cells(1, TestCol), .Cells(.Rows.Count, TestCol).End(xlUp))
+        ' Get data as a Variant Array to speed things up
+        dat = rng.Value
+        
+        ' Creates a dummy integer reference
+        For i = 2 To UBound(dat, 1)
+            Cells(i, DumCol).Value = CInt(Cells(i, TestCol).Value)
+        Next
+        
+        Set nrng = .Range(.Cells(1, DumCol), .Cells(.Rows.Count, DumCol).End(xlUp))
+        ' Get data as a Variant Array to speed things up
+        ndat = nrng.Value
+        
+        ' Loop the Variant Array
+        For i = 2 To UBound(dat, 1)
+            ' Is value unique?
+            cnt = Application.CountIfs(rng, dat(i, 1))
+            If cnt = 1 Then
+                ' If so, add to delete range
+                If rDel Is Nothing Then
+                    Set rDel = .Cells(i, TestCol)
+                Else
+                    Set rDel = Union(rDel, .Cells(i, TestCol))
+                End If
+            End If
+        Next
+    End With
+    ' Do the delete
+    If Not rDel Is Nothing Then
+        rDel.EntireRow.Delete
+    End If
+    '
+    With ActiveSheet    
+
+        ' Loop the Variant Array
+        For i = 2 To UBound(ndat, 1)
+            ' Is value unique?
+            cnt = Application.CountIfs(nrng, ndat(i, 1))
+            If cnt = 1 Then
+
+                ' If so, add to delete range
+                If rDel Is Nothing Then
+                    Set rDel = .Cells(i, DumCol)
+                Else
+                    Set rDel = Union(rDel, .Cells(i, TestCol))
+                End If
+            End If
+        Next
+    End With
+
+    ' Do the delete
+    If Not rDel Is Nothing Then
+        rDel.EntireRow.Delete
+    End If
+    nrng.ClearContents
+End Sub
