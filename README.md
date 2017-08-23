@@ -1,7 +1,7 @@
 # toolkit
 Assembling multi-tool scripts for modular use in work.
 
-Aiming for flexibility and ease of use enough for similarly positioned business/accountancy professionals with only basic knowledge of programming.
+Aiming for flexibility and ease of use enough for similarly positioned business/accountancy professionals with basic knowledge of programming.
 
 ## Current works
 
@@ -31,6 +31,8 @@ picresize.py: resizes image files in a directory filewalk, specific folder or sp
 
 pdfresizer.py: resizes pdf files in a directory filewalk, specific folder or specific file to (500, x), roughly keeping aspect ratio.
 
+ClearDuplicateRowsVBA.txt: for use in ms excel VBA. Delete entire row where duplicate entries in specified column.
+
 
 ## Recommendations:
 
@@ -40,9 +42,11 @@ pdfresizer.py: resizes pdf files in a directory filewalk, specific folder or spe
 
 ## To do:
 
--Continue picking up Pandas, NumPy, matplotlib, scikit-learn, NLTK, and NetworkX, implement current scripts to better interface with data analysis libraries. 
+-Continue picking up scikit-learn, NLTK, and NetworkX, implement current scripts to better interface with data analysis libraries. 
 
 --for pandas, tweak multiread to yield, dictionary of ordered lists, keys as imported column name for pandas dataframe, value as list with all the values for the column, in accordance to the index. Alternatively, List of lists, each inner list a row, with values within ordered in accordance to columns. Note common format for tweaking the other more general purpose programming scripts.
+
+-Move on to SAS after completing python data science courses.
 
 -get started on Gui Automation.
 
