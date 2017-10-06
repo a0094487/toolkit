@@ -1,0 +1,399 @@
+Dim answer As Integer
+answer = MsgBox("Are you sure you want to empty the sheet?", vbYesNo + vbQuestion, "Empty Sheet")
+If answer = vbYes Then
+    Cells.ClearContents
+Else
+    'do nothing
+End If
+
+'Swap "Dim" for "Static" if want to preserve variable value after procedure
+
+
+Dim employee As String, total As Integer, sheet As Worksheet, i As Integer
+total = 0
+employee = InputBox("Enter the employee name (case sensitive)")
+For Each sheet In Worksheets
+    For i = 2 To 13 Step 1 
+    'Step 1 by default, can set different steps/increments
+        If sheet.Cells(i, 2).Value = employee Then
+        total = total + sheet.Cells(i, 3).Value
+	End If
+    Next i
+Next sheet
+MsgBox "Total sales of " & employee & " is " & total
+
+
+Dim directory As String, fileName As String, sheet As Worksheet, i As Integer, j As Integer
+Application.ScreenUpdating = False
+directory = "c:\test\"
+fileName = Dir(directory & "*.xl??")
+Do While fileName <> ""
+Loop
+i = i + 1
+j = 2
+Cells(i, 1) = fileName
+Workbooks.Open (directory & fileName)
+For Each sheet In Workbooks(fileName).Worksheets
+    Workbooks("files-in-a-directory.xls").Worksheets(1).Cells(i, j).Value = sheet.Name
+    j = j + 1
+Next sheet
+Workbooks(fileName).Close
+fileName = Dir()
+Application.ScreenUpdating = True
+
+
+Dim rangeToUse As Range, singleArea As Range, cell1 As Range, cell2 As Range, i As Integer, j As Integer
+Set rangeToUse = Selection
+Cells.Interior.ColorIndex = 0
+Cells.Borders.LineStyle = xlNone
+If Selection.Areas.Count <= 1 Then
+      MsgBox "Please select more than one area."
+Else
+rangeToUse.Interior.ColorIndex = 38
+For Each singleArea In rangeToUse.Areas
+    singleArea.BorderAround ColorIndex:=1, Weight:=xlThin
+For i = 1 To rangeToUse.Areas.Count
+    For j = i + 1 To rangeToUse.Areas.Count
+        For Each cell1 In rangeToUse.Areas(i)
+            For Each cell2 In rangeToUse.Areas(j)
+                If cell1.Value = cell2.Value Then
+                    cell1.Interior.ColorIndex = 0
+                    cell2.Interior.ColorIndex = 0
+                End If
+            Next cell2
+        Next cell1
+    Next j
+Next i
+Next singleArea
+End If
+Dim cht As ChartObject
+For Each cht In Worksheets(1).ChartObjects
+Next cht
+cht.Chart.ChartType = xlPie
+
+
+Worksheets(1).ChartObjects(1).Activate
+ActiveChart.ChartTitle.Text = "Sales Report"
+ActiveChart.Legend.Position = xlBottom
+
+
+Dim rng As Range, cell As Range
+Set rng = Range("C4:D10")
+Set cell = Selection
+If cell.Count = 1 And IsNumeric(cell) And Not IsEmpty(cell) And Not Intersect(rng, cell) Is Nothing Then
+    MsgBox "You win"
+Else
+    MsgBox "You lose"
+End If
+
+
+'Nothing, just sample code. Assuming Column A lists teams, spits out matchups in column C
+Dim rng As Range, matchname As String, counter As Integer, i As Integer, j As Integer
+Set rng = Range("A1").CurrentRegion.Rows
+counter = 0
+Worksheets(1).Columns(3) = ""
+For i = 1 To rng.Count
+    For j = i + 1 To rng.Count
+matchname = rng.Cells(i).Value & " vs " & rng.Cells(j).Value
+Cells(counter + 1, 3).Value = matchname
+counter = counter + 1
+ Next j
+Next i
+ActiveSheet.Columns(3).PrintPreview
+
+
+'gives tax in B2 for income in A2
+Dim income As Double
+Dim tax As Double
+income = Round(Range("A2").Value)
+Range("A2").Value = income
+Select Case income
+    Case Is >= 180001
+        tax = 55850 + 0.45 * (income - 180000)
+    Case Is >= 80001
+        tax = 17850 + 0.38 * (income - 80000)
+    Case Is >= 35001
+        tax = 4350 + 0.3 * (income - 35000)
+    Case Is >= 6001
+        tax = 0.15 * (income - 6000)
+    Case Else
+        tax = 0
+End Select
+Range("B2").Value = tax
+
+
+'column2 = column1 +10
+Dim i As Integer
+i = 1 'Step 1
+Do While Cells(i, 1).Value <> ""
+'Do Until Cells(i, 1).Value = ""
+    Cells(i, 2).Value = Cells(i, 1).Value + 10
+    i = i + 1
+Loop
+
+
+'Reshuffles strings in column 1
+Dim tempString As String, tempInteger As Integer, i As Integer, j As Integer, rng As Integer
+rng = Range("A1").CurrentRegion.Rows.Count
+For i = 1 To rng
+    Cells(i, 2).Value = WorksheetFunction.RandBetween(0, 1000)
+Next i
+For i = 1 To rng
+    For j = i + 1 To rng
+    On Error Resume Next
+	If Cells(j, 2).Value < Cells(i, 2).Value Then
+    	tempString = Cells(i, 1).Value
+	Cells(i, 1).Value = Cells(j, 1).Value
+	Cells(j, 1).Value = tempString
+	tempInteger = Cells(i, 2).Value
+	Cells(i, 2).Value = Cells(j, 2).Value
+	Cells(j, 2).Value = tempInteger
+	End If
+    Next j
+Next i
+Range(Range("B1"), Range("B1").End(xlDown)).Value = ""
+
+
+Dim rng As Range, cell As Range
+Set rng = Selection
+For Each cell In rng
+On Error GoTo InvalidValue:
+cell.Value = Sqr(cell.Value)
+Next cell
+Exit Sub
+InvalidValue:
+Msgbox "Error Number " & Err.Number & " " & Err.Description & " at cell " & cell.Address
+Resume Next
+
+
+'Counts words in range
+Dim rng As Range, cell As Range
+Dim cellWords, totalWords As Integer, content As String
+Set rng = Selection
+cellWords = 0
+totalWords = 0
+For Each cell In rng
+    If Not cell.HasFormula And Not IsNumeric(cell) Then
+	content = cell.Value
+	content = Trim(content)
+	If content = "" Then
+    	    cellWords = 0
+	    Else
+    	    cellWords = 1
+	End If
+	Do While InStr(content, " ") > 0
+            content = Mid(content, InStr(content, " "))
+            content = Trim(content)
+            cellWords = cellWords + 1
+        Loop
+        totalWords = totalWords + cellWords
+    End If
+Next cell
+MsgBox totalWords & " words found in the selected range. " & DateValue(Now)
+
+
+Dim date1 As Date, date2 As Date, dateToCheck As Date
+Dim daysBetween As Integer, weekdays As Integer, i As Integer
+weekdays = 0
+date1 = Range("B2")
+date2 = Date
+daysBetween = DateDiff("d", date1, date2)
+'d for days, ww for weeks
+For i = 0 To daysBetween
+dateToCheck = DateAdd("d", i, date1) 'adds i "d"s to date1
+If (Weekday(dateToCheck) <> 1 And Weekday(dateToCheck) <> 7) Then
+    weekdays = weekdays + 1
+'Weekday=1 for Sunday, =7 for Saturday
+End If
+Next i
+MsgBox weekdays & " weekdays between these two dates " & Now
+
+
+Private Sub Worksheet_Change(ByVal Target As Range)
+If Target.Address = "$B$2" Then
+'To limit change event to change of $B$2.
+    If Target.Value > 80 Then MsgBox "Goal Completed"
+    End If
+End If
+
+Private Sub Worksheet_BeforeDelete()
+Cancel = True 'To Troll others, cancels the trigger(delete in this case)
+
+Application.DisplayAlerts = False
+ActiveWorkbook.Close
+Application.DisplayAlerts = True
+
+
+Dim films As Variant
+films = Array("Sales", "Production", "Logistics")
+ReDim films(1) 'Could Dim as films(1) As String from the Get go
+films = Array("Sales", "Production") 'Alternatively, insert "Preserve after "Redim" in above line
+ReDim films(1 To 2, 1 To 2)
+films(1, 1) = "film1"
+films(1, 2) = "film2"
+films(2, 1) = "film3"
+films(2, 2) = "film4"
+Selection.Value = films 'For a 2x2 selection, workaround
+Selection.Offset(0, 2).Select 'Just messing around, shifts selection to the right
+Dim x, y As Integer
+x = UBound(films, 1) - LBound(films, 1) + 1
+y = UBound(films, 2) - LBound(films, 2) + 1
+MsgBox "This array consists of " & x * y & " elements: " & films(1, 1) & ", "  _
+& ", " & films(1, 2) & ", " & films(2, 1) & ", " & films(2, 2) 
+'The "_" allows syntex to continue on next line
+
+
+'Theory lesson on function value handling
+Function MYFUNCTION(ByRef cell As Range, ByVal x As Double) As Double
+'"ByRef" inclusion optional, on by default. Function transforms the variable. Alternative is ByVal; transform a copy of variable.
+Application.Volatile 'updates cell when offset is affected.
+x = x * (cell.Value + cell.Offset(1, 0).Value)
+MYFUNCTION = x 
+'Alternatively, 1 line: MYFUNCTION= x * (cell.Value + cell.Offset(1, 0).Value)
+End Function
+'So if ByRef x, now x.value=myfunction.value, but if ByVal, embedded x retains former value. Relevant if operating on function & x in Sub.
+
+
+'Makes a pretty pattern
+Dim i, j As Integer
+Application.StatusBar = "Running Macro.. "
+Application.ScreenUpdating = False
+Cells.ClearContents
+For i = 1 To 4096 
+    For j = 1 To 4
+        If (i * 8 ^ (4 - j)) <= 4096 Then
+        Cells(i * 8 ^ (4 - j), j).Value = (i Mod 8)
+            If (i Mod 8) = 0 Then
+            Cells(i * 8 ^ (4 - j), j).Value = 8
+            End If
+        End If
+    Next j
+Next i
+For i = 1 To 4096
+    For j = 1 To 4
+        If Cells(4097 - i, 5 - j).Value = "" And _
+        Cells(4098 - i, 5 - j).Value <> "" Then
+            Cells(4097 - i, 5 - j).Value = Cells(4098 - i, 5 - j).Value
+	    'Note 4097-i should give row 1 at the limit
+        End If
+    Next j
+Next i
+Application.ScreenUpdating = True
+Application.StatusBar = False
+
+
+'Searchs a string in .txt, outputs substring
+Dim myFile As String, text As String, textline As String, posLat As Integer, posLong As Integer
+myFile = Application.GetOpenFilename() 
+'myFile = "C:\folder\iwantthisdata.txt" 'Alternatively
+Open myFile For Input As #1
+Do Until EOF(1) 'EOF(1)==true=when reached end of file.
+    Line Input #1, textline 'Line Input requires "#filenumber", copies line into variable "textline"
+    text = text & textline
+Loop
+Close dummyfile
+posw = InStr(text, "someword") 'InStr returns position of substring in string
+lensw = Len("someword") 'Len() returns length of a string
+Range("A1").Value = Mid(text, posw + lensw, 5) 'Mid() from the string, starting from that position, extracts a substring of that length (5 here) 
+
+
+'writes a csv
+Dim myFile As String, rng As Range, cellValue As Variant, i As Integer, j As Integer
+myFile = Application.DefaultFilePath & "\succinctfilename.csv"
+Set rng = Selection
+Open myFile For Output As dummyfile
+For i = 1 To rng.Rows.Count
+    For j = 1 To rng.Columns.Count
+    cellValue = rng.Cells(i, j).Value
+        If j = rng.Columns.Count Then
+        Write dummyfile, cellValue
+        Else
+        Write dummyfile, cellValue,
+	End If
+    Next j
+Next i
+Close dummyfile
+
+
+Private Sub CommandButton1_Click()
+UserForm1.Show
+End Sub
+Private Sub UserForm_Initialize()
+ListBox1.Clear
+With ListBox1
+    .AddItem "yourmom"
+    .AddItem "yoursis"
+End With
+CheckBox1.Value = False
+End Sub
+Private Sub SpinButton1_Change()
+TextBox1.Text = SpinButton1.Value
+End Sub
+Private Sub CommandButton2_Click()
+Dim emptyRow As Long
+Sheet1.Activate
+emptyRow = WorksheetFunction.CountA(Range("A:A")) + 1
+Cells(emptyRow, 1).Value = ListBox1.Value
+If CheckBox1.Value = True Then Cells(emptyRow, 2).Value = CheckBox1.Caption
+End If
+Cells(emptyRow, 3).Value = TextBox1.Value
+End Sub
+Private Sub CommandButton3_Click()
+Call UserForm_Initialize
+End Sub
+Private Sub CommandButton4_Click()
+Unload Me
+End Sub
+
+
+'clears rows for uniques
+Sub someshit()
+ Dim rDel As Range, rng As Range, nrng As Range
+    Dim dat As Variant, ndat As Variant
+    Dim i As Long, cnt As Long
+    Dim TestCol As Long, DumCol As Long
+
+    ' Avoid magic numbers
+    TestCol = 3 ' Column C
+    DumCol = 8
+
+    ' Reference the correct sheet
+    With ActiveSheet
+        ' Get data range
+        Set rng = .Range(.Cells(1, TestCol), .Cells(.Rows.Count, TestCol).End(xlUp))
+        ' Get data as a Variant Array to speed things up
+        dat = rng.Value
+        
+        ' Creates a dummy integer reference
+        For i = 2 To UBound(dat, 1)
+            Cells(i, DumCol).Value = CInt(Cells(i, TestCol).Value)
+        Next
+        
+        Set nrng = .Range(.Cells(1, DumCol), .Cells(.Rows.Count, DumCol).End(xlUp))
+        ' Get data as a Variant Array to speed things up
+        ndat = nrng.Value
+        
+        ' Loop the Variant Array
+        For i = 2 To UBound(ndat, 1)
+            ' Is value unique?
+            cnt = Application.CountIfs(nrng, ndat(i, 1))
+            If cnt = 1 Then
+
+                ' If so, add to delete range
+                If rDel Is Nothing Then
+                    Set rDel = .Cells(i, DumCol)
+                Else
+                    Set rDel = Union(rDel, .Cells(i, TestCol))
+                End If
+            End If
+        Next
+    End With
+
+    ' Do the delete
+    If Not rDel Is Nothing Then
+        rDel.EntireRow.Delete
+    End If
+    nrng.ClearContents
+End Sub
+
+
